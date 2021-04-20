@@ -23,32 +23,16 @@ void send_to_disp(uint32_t);
 char key_scanner(void);
 //+++++++++++++++++++++++++++++++++++++| MAIN |+++++++++++++++++++++++++++++++++++++
 void main(void){
-    int num_to_disp = 0;
-    char = pos1ant;
-    char = pos1;
-    char = pos2;
-    char = pos3;
-    char = pos4;
-    char = sumhex;
-    pos1= 0x00;
-    pos1ant= 0x00;
-    
+    int num_to_disp = 0;    
     portsInit();
     while(1){
-       
-        pos1ant= key_scanner (); //agarra valor de keypad
-        
-        if (pos1 != pos1ant) // compara valores del boton con primera posicion
-        {
-         pos1=pos1ant;
-         pos2=pos1;
-         pos3=pos2;
-         pos4=pos3;
+        char pos1 = key_scanner();            // Toma el nuevo valor cuando se presiona una tecla
+        if(pos1!='x'){                     // Entra al ciclo una vez que se presiona una nueva tecla
+            __delay_ms(1000);                // Se hace un delay
+            uint32_t sumhex = sumhex << 8 ;          // Se hace un 'logic shift' a la izquierda
+            uint32_t sumhex = sumhex & pos1ant;      // Se toma la nueva posición y se integra a la palabra
         }
-       
-      uint32_t sumhex = pos4 + pos3 + pos2 + pos1; //palabra formada ejemplo= 0x01+0x02+0x03+0x04
       send_to_disp(sumhex);                        //palabra formada 
-    }
 }
 
 //+++++++++++++++++++++++++++++++++++++| FUNCTIONS |+++++++++++++++++++++++++++++++++++++
