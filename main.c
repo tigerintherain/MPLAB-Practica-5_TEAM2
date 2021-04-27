@@ -30,7 +30,7 @@ void main(void){
         if(pos1!='x'){                     // Entra al ciclo una vez que se presiona una nueva tecla
             __delay_ms(1000);                // Se hace un delay
             uint32_t sumhex = sumhex << 8 ;          // Se hace un 'logic shift' a la izquierda
-            uint32_t sumhex = sumhex & pos1;      // Se toma la nueva posición y se integra a la palabra
+            uint32_t sumhex = sumhex | pos1;      // Se toma la nueva posición y se integra a la palabra
         }
       send_to_disp(sumhex);                        //palabra formada 
 }
